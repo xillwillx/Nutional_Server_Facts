@@ -13,12 +13,12 @@
 
 <?php
 
-function formatBytes($size, $precision = 2)
-{
-    $base = log($size, 1024);
-    $suffixes = array('', ' KB', ' MB', ' GB', ' TB');
-    return round(pow(1024, $base - floor($base)), $precision) . $suffixes[floor($base)];
-}
+    function formatBytes($bytes)
+    {
+        $s = array('B', 'KB', 'MB', 'GB', 'TB', 'PB');
+        $e = floor(log($bytes)/log(1024));
+        return sprintf('%.2f '.$s[$e], ($bytes/pow(1024, floor($e))));
+    }
 
 function dirSize($directory) {
     $size = 0;
@@ -58,20 +58,13 @@ function dirSize($directory) {
 
 	<tr>
 		<td valign="top" align="left" colspan="2">
-			<font face="Arial" size="2">Calories 
-			<?php 
-            echo formatBytes(dirSize("/var/www/"));
-			?>
+			<font face="Arial" size="2">Calories <?php echo formatBytes(dirSize("/var/www/"));?>
 </td></tr>
 	<tr>	<td valign="top" align="left">
-			<font face="Arial" size="2">Daily Allowance
-			<?php 
-			 $ds = disk_total_space("/");
-			 echo formatBytes($ds);
-			?>
+			<font face="Arial" size="2">Daily Allowance  <?php echo formatBytes(disk_total_space("/"));?>
 </font>
-		
-			
+
+
 </font>
 		</td>
 	</tr>
@@ -85,18 +78,23 @@ function dirSize($directory) {
 	</tr>
 
 	<tr><td bgcolor="#000000" colspan="2"><img src="images/spacer.gif" width="1" height="1"</td></tr>
-<?php
-$fh = fopen('/proc/meminfo', 'r');
-$mem = array();
-while($line = fgets($fh)) {
-    array_push($mem, explode(":", $line));
-}
-fclose($fh);
-
-?>
+		<?php
+			$fh = fopen('/proc/meminfo', 'r');
+			$mem = array();
+			while($line = fgets($fh)) {
+    				array_push($mem, explode(":", $line));
+			}
+			fclose($fh);
+ 			$totalmemory = preg_replace('/\D/', '', $mem[0][1]);
+			$freememory =  preg_replace('/\D/', '', $mem[1][1]); 
+			$availmemory = preg_replace('/\D/', '', $mem[2][1]);
+                        $totalswap = preg_replace('/\D/', '', $mem[14][1]);
+                        $freeswap = preg_replace('/\D/', '', $mem[15][1]);
+                        $usedswap = preg_replace('/\D/', '', $mem[5][1]);
+		?>
 	<tr>
 		<td valign="top" align="left">
-			<font face="Arial" size="2"><b>Total Memory</b><?php printf(" %s", $mem[0][1]);?></font>
+			<font face="Arial" size="2"><b>Total Memory</b> <?php echo formatBytes($totalmemory*1024);?></font>
 		</td>
 		<td valign="top" align="right">
 			<font face="Arial" size="2">100%</font>
@@ -107,10 +105,10 @@ fclose($fh);
 
 	<tr>
 		<td valign="top" align="left">
-			<font face="Arial" size="2">&nbsp; &nbsp; Free  Memory <?php printf(" %s", $mem[1][1]);?></font>
+			<font face="Arial" size="2">&nbsp; &nbsp; Free  Memory &nbsp;<?php echo formatBytes($freememory*1024);?></font>
 		</td>
 		<td valign="top" align="right">
-			<font face="Arial" size="2">34.98%</font>
+			<font face="Arial" size="2"><?php echo round($freememory *100 / $totalmemory, 2)."%";?></font>
 		</td>
 	</tr>
 
@@ -118,10 +116,10 @@ fclose($fh);
 
 	<tr>
 		<td valign="top" align="left">
-			<font face="Arial" size="2">&nbsp; &nbsp; Memory Available <?php printf(" %s", $mem[2][1]);?></font>
+			<font face="Arial" size="2">&nbsp; &nbsp; Memory Avail <?php echo formatBytes($availmemory*1024);?></font>
 		</td>
 		<td valign="top" align="right">
-			<font face="Arial" size="2">65.02%</font>
+			<font face="Arial" size="2"><?php echo round($availmemory *100 / $totalmemory, 2)."%";?></font>
 		</td>
 	</tr>
 
@@ -129,7 +127,7 @@ fclose($fh);
 
 	<tr>
 		<td valign="top" align="left">
-			<font face="Arial" size="2"><b>Total Swap</b><?php printf(" %s", $mem[14][1]);?> </font>
+			<font face="Arial" size="2"><b>Total Swap</b><?php echo formatBytes($totalswap*1024);?> </font>
 		</td>
 		<td valign="top" align="right">
 			<font face="Arial" size="2">100%</font>
@@ -140,10 +138,10 @@ fclose($fh);
 
 	<tr>
 		<td valign="top" align="left">
-			<font face="Arial" size="2">&nbsp; &nbsp; Used Swap <?php printf(" %s", $mem[5][1]);?></font>
+			<font face="Arial" size="2">&nbsp; &nbsp; Used Swap <?php echo formatBytes($usedswap*1024);?></font>
 		</td>
 		<td valign="top" align="right">
-			<font face="Arial" size="2">0.02%</font>
+			<font face="Arial" size="2"><?php echo round($usedswap*100 / $totalswap, 2)."%";?></font>
 		</td>
 	</tr>
 
@@ -151,10 +149,10 @@ fclose($fh);
 
 	<tr>
 		<td valign="top" align="left">
-			<font face="Arial" size="2">&nbsp; &nbsp; Free Swap <?php printf(" %s", $mem[15][1]);?></font>
+			<font face="Arial" size="2">&nbsp; &nbsp; Free Swap <?php echo formatBytes($freeswap*1024);?></font>
 		</td>
 		<td valign="top" align="right">
-			<font face="Arial" size="2">99.98%</font>
+			<font face="Arial" size="2"><?php echo round($freeswap*100 / $totalswap, 2)."%";?></font>
 		</td>
 	</tr>
 
@@ -162,10 +160,10 @@ fclose($fh);
 
 	<tr>
 		<td valign="top" align="left">
-			<font face="Arial" size="2"><b>Active Users</b> <?php echo exec('who |cut -c 1-9 |sort -u |wc -l'); ?></font>
+			<font face="Arial" size="2"><b>Active Users</b> <?php $usernum =  exec('who |cut -c 1-9 |sort -u |wc -l'); echo $usernum; ?></font>
 		</td>
 		<td valign="top" align="right">
-			<font face="Arial" size="2">200%</font>
+			<font face="Arial" size="2"><?php $users = exec('cat /etc/passwd |grep "/bin/bash"  |cut -d: -f1 | wc -l'); echo $usernum*100/$users."%";?></font>
 		</td>
 	</tr>
 
@@ -173,7 +171,12 @@ fclose($fh);
 
 	<tr>
 		<td valign="top" align="left">
-			<font face="Arial" size="2"><b>Total Traffic</b> 590.01 MB</font>
+			<font face="Arial" size="2"><b>Total Traffic</b> 
+				<?php 	$rx  = (trim(file_get_contents("/sys/class/net/eth0/statistics/rx_bytes"))); 
+					$tx  = (trim(file_get_contents("/sys/class/net/eth0/statistics/tx_bytes")));
+					$totes = $tx+$rx;
+					echo formatBytes($totes); ?>
+				</font>
 		</td>
 		<td valign="top" align="right">
 			<font face="Arial" size="2">100%</font>
@@ -192,10 +195,11 @@ fclose($fh);
 
 	<tr>
 		<td valign="top" align="left">
-			<font face="Arial" size="2">&nbsp; &nbsp; Bytes In 376.68 MB</font>
+			<font face="Arial" size="2">&nbsp; &nbsp; Bytes In 
+  			<?php echo formatBytes($rx);?></font>
 		</td>
 		<td valign="top" align="right">
-			<font face="Arial" size="2">63.84%</font>
+			<font face="Arial" size="2"><?php echo round($rx *100 / $totes, 2); ?> %</font>
 		</td>
 	</tr>
 
@@ -203,43 +207,13 @@ fclose($fh);
 
 	<tr>
 		<td valign="top" align="left">
-			<font face="Arial" size="2">&nbsp; &nbsp; Bytes Out 213.33 MB</font>
+			<font face="Arial" size="2">&nbsp; &nbsp; Bytes Out
+                        <?php echo formatBytes($tx);?></font>
 		</td>
 		<td valign="top" align="right">
-			<font face="Arial" size="2">36.16%</font>
+			<font face="Arial" size="2"><?php echo round($tx *100 / $totes, 2); ?> %</font>
 		</td>
 	</tr>
-
-	<tr><td bgcolor="#000000" colspan="2"><img src="images/spacer.gif" width="1" height="1"</td></tr>
-
-	<tr>
-		<td valign="top" colspan="2">
-			<font face="Arial" size="2"><b>Intranet</b></font>
-		</td>
-	</tr>
-
-	<tr><td bgcolor="#000000" colspan="2"><img src="images/spacer.gif" width="1" height="1"</td></tr>
-
-	<tr>
-		<td valign="top" align="left">
-			<font face="Arial" size="2">&nbsp; &nbsp; Bytes In 0.00 KB</font>
-		</td>
-		<td valign="top" align="right">
-			<font face="Arial" size="2">0%</font>
-		</td>
-	</tr>
-
-	<tr><td bgcolor="#000000" colspan="2"><img src="images/spacer.gif" width="1" height="1"</td></tr>
-
-	<tr>
-		<td valign="top" align="left">
-			<font face="Arial" size="2">&nbsp; &nbsp; Bytes Out 0.00 KB</font>
-		</td>
-		<td valign="top" align="right">
-			<font face="Arial" size="2">0%</font>
-		</td>
-	</tr>
-
 
 	<tr><td bgcolor="#000000" colspan="2"><img src="images/spacer.gif" width="1" height="1"</td></tr>
 
@@ -277,6 +251,5 @@ echo "$days days $hours hrs $mins mins";
 	</tr>
 </table>
 </td></tr></table>
-
 </body>
 </html>
