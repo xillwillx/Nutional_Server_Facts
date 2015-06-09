@@ -46,7 +46,7 @@ function dirSize($directory) {
 </font>
 </td>
 </tr>
-<tr><td bgcolor="#000000" colspan="2"><img src="images/spacer.gif" width="1" height="8"</td></tr>
+<tr><td bgcolor="#000000" colspan="2" style="width: 1px; height:8px"></td></tr>
 
 	<tr>
 		<td valign="top" colspan="2">
@@ -54,7 +54,7 @@ function dirSize($directory) {
 		</td>
 	</tr>
 
-	<tr><td bgcolor="#000000" colspan="2"><img src="images/spacer.gif" width="1" height="1"</td></tr>
+	<tr><td bgcolor="#000000" colspan="2" style="width: 1px; height:1px"></td></tr>
 
 	<tr>
 		<td valign="top" align="left" colspan="2">
@@ -69,7 +69,7 @@ function dirSize($directory) {
 		</td>
 	</tr>
 
-	<tr><td bgcolor="#000000" colspan="2"><img src="images/spacer.gif" width="1" height="5"</td></tr>
+	<tr><td bgcolor="#000000" colspan="2"style="width: 1px; height:5px"></td></tr>
 
 	<tr>
 		<td valign="top" align="right" colspan="2">
@@ -77,7 +77,7 @@ function dirSize($directory) {
 		</td>
 	</tr>
 
-	<tr><td bgcolor="#000000" colspan="2"><img src="images/spacer.gif" width="1" height="1"</td></tr>
+	<tr><td bgcolor="#000000" colspan="2"style="width: 1px; height:1px"></td></tr>
 		<?php
 			$fh = fopen('/proc/meminfo', 'r');
 			$mem = array();
@@ -94,84 +94,84 @@ function dirSize($directory) {
 		?>
 	<tr>
 		<td valign="top" align="left">
-			<font face="Arial" size="2"><b>Total Memory</b> <?php echo formatBytes($totalmemory*1024);?></font>
+			<font face="Arial" size="2"><b>Total Memory</b>&nbsp; &nbsp; <?php echo formatBytes($totalmemory*1024);?></font>
 		</td>
 		<td valign="top" align="right">
 			<font face="Arial" size="2">100%</font>
 		</td>
 	</tr>
 
-	<tr><td bgcolor="#000000" colspan="2"><img src="images/spacer.gif" width="1" height="1"</td></tr>
+	<tr><td bgcolor="#000000" colspan="2"style="width: 1px; height:1px"></td></tr>
 
 	<tr>
 		<td valign="top" align="left">
-			<font face="Arial" size="2">&nbsp; &nbsp; Free  Memory &nbsp;<?php echo formatBytes($freememory*1024);?></font>
+			<font face="Arial" size="2">&nbsp; &nbsp;  &nbsp; Free  Memory &nbsp;<?php echo formatBytes($freememory*1024);?></font>
 		</td>
 		<td valign="top" align="right">
 			<font face="Arial" size="2"><?php echo round($freememory *100 / $totalmemory, 2)."%";?></font>
 		</td>
 	</tr>
 
-	<tr><td bgcolor="#000000" colspan="2"><img src="images/spacer.gif" width="1" height="1"</td></tr>
+	<tr><td bgcolor="#000000" colspan="2"style="width: 1px; height:1px"></td></tr>
 
 	<tr>
 		<td valign="top" align="left">
-			<font face="Arial" size="2">&nbsp; &nbsp; Memory Avail <?php echo formatBytes($availmemory*1024);?></font>
+			<font face="Arial" size="2">&nbsp; &nbsp; &nbsp; Memory Avail <?php echo formatBytes($availmemory*1024);?></font>
 		</td>
 		<td valign="top" align="right">
 			<font face="Arial" size="2"><?php echo round($availmemory *100 / $totalmemory, 2)."%";?></font>
 		</td>
 	</tr>
 
-	<tr><td bgcolor="#000000" colspan="2"><img src="images/spacer.gif" width="1" height="1"</td></tr>
+	<tr><td bgcolor="#000000" colspan="2"style="width: 1px; height:1px"></td></tr>
 
 	<tr>
 		<td valign="top" align="left">
-			<font face="Arial" size="2"><b>Total Swap</b><?php echo formatBytes($totalswap*1024);?> </font>
+			<font face="Arial" size="2"><b>Total Swap</b>   &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;<?php echo formatBytes($totalswap*1024);?> </font>
 		</td>
 		<td valign="top" align="right">
 			<font face="Arial" size="2">100%</font>
 		</td>
 	</tr>
 
-	<tr><td bgcolor="#000000" colspan="2"><img src="images/spacer.gif" width="1" height="1"</td></tr>
+	<tr><td bgcolor="#000000" colspan="2"style="width: 1px; height:1px"></td></tr>
 
 	<tr>
 		<td valign="top" align="left">
-			<font face="Arial" size="2">&nbsp; &nbsp; Used Swap <?php echo formatBytes($usedswap*1024);?></font>
+			<font face="Arial" size="2">&nbsp; &nbsp; Used Swap   &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;<?php echo formatBytes($usedswap*1024);?></font>
 		</td>
 		<td valign="top" align="right">
 			<font face="Arial" size="2"><?php echo round($usedswap*100 / $totalswap, 2)."%";?></font>
 		</td>
 	</tr>
 
-	<tr><td bgcolor="#000000" colspan="2"><img src="images/spacer.gif" width="1" height="1"</td></tr>
+	<tr><td bgcolor="#000000" colspan="2"style="width: 1px; height:1px"></td></tr>
 
 	<tr>
 		<td valign="top" align="left">
-			<font face="Arial" size="2">&nbsp; &nbsp; Free Swap <?php echo formatBytes($freeswap*1024);?></font>
+			<font face="Arial" size="2">&nbsp; &nbsp; Free Swap  &nbsp; &nbsp;  &nbsp;<?php echo formatBytes($freeswap*1024);?></font>
 		</td>
 		<td valign="top" align="right">
 			<font face="Arial" size="2"><?php echo round($freeswap*100 / $totalswap, 2)."%";?></font>
 		</td>
 	</tr>
 
-	<tr><td bgcolor="#000000" colspan="2"><img src="images/spacer.gif" width="1" height="1"</td></tr>
+	<tr><td bgcolor="#000000" colspan="2"style="width: 1px; height:1px"></td></tr>
 
 	<tr>
 		<td valign="top" align="left">
-			<font face="Arial" size="2"><b>Active Users</b> <?php $usernum =  exec('who |cut -c 1-9 |sort -u |wc -l'); echo $usernum; ?></font>
+			<font face="Arial" size="2"><b>Active Users</b>   &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;<?php $usernum =  exec('who |cut -c 1-9 |sort -u |wc -l'); echo $usernum; ?></font>
 		</td>
 		<td valign="top" align="right">
 			<font face="Arial" size="2"><?php $users = exec('cat /etc/passwd |grep "/bin/bash"  |cut -d: -f1 | wc -l'); echo $usernum*100/$users."%";?></font>
 		</td>
 	</tr>
 
-	<tr><td bgcolor="#000000" colspan="2"><img src="images/spacer.gif" width="1" height="1"</td></tr>
+	<tr><td bgcolor="#000000" colspan="2"style="width: 1px; height:1px"></td></tr>
 
 	<tr>
 		<td valign="top" align="left">
-			<font face="Arial" size="2"><b>Total Traffic</b> 
+			<font face="Arial" size="2"><b>Total Traffic</b>  &nbsp; &nbsp; &nbsp;
 				<?php 	$rx  = (trim(file_get_contents("/sys/class/net/eth0/statistics/rx_bytes"))); 
 					$tx  = (trim(file_get_contents("/sys/class/net/eth0/statistics/tx_bytes")));
 					$totes = $tx+$rx;
@@ -183,19 +183,11 @@ function dirSize($directory) {
 		</td>
 	</tr>
 
-	<tr><td bgcolor="#000000" colspan="2"><img src="images/spacer.gif" width="1" height="1"</td></tr>
-
-	<tr>
-		<td valign="top" colspan="2">
-			<font face="Arial" size="2"><b>Extranet</b></font>
-		</td>
-	</tr>
-
-	<tr><td bgcolor="#000000" colspan="2"><img src="images/spacer.gif" width="1" height="1"</td></tr>
+	<tr><td bgcolor="#000000" colspan="2"style="width: 1px; height:1px"></td></tr>
 
 	<tr>
 		<td valign="top" align="left">
-			<font face="Arial" size="2">&nbsp; &nbsp; Bytes In 
+			<font face="Arial" size="2">&nbsp; &nbsp; Bytes In  &nbsp; &nbsp; &nbsp; &nbsp;
   			<?php echo formatBytes($rx);?></font>
 		</td>
 		<td valign="top" align="right">
@@ -203,11 +195,11 @@ function dirSize($directory) {
 		</td>
 	</tr>
 
-	<tr><td bgcolor="#000000" colspan="2"><img src="images/spacer.gif" width="1" height="1"</td></tr>
+	<tr><td bgcolor="#000000" colspan="2"style="width: 1px; height:1px"></td></tr>
 
 	<tr>
 		<td valign="top" align="left">
-			<font face="Arial" size="2">&nbsp; &nbsp; Bytes Out
+			<font face="Arial" size="2">&nbsp; &nbsp; Bytes Out &nbsp; &nbsp; &nbsp;
                         <?php echo formatBytes($tx);?></font>
 		</td>
 		<td valign="top" align="right">
@@ -215,11 +207,11 @@ function dirSize($directory) {
 		</td>
 	</tr>
 
-	<tr><td bgcolor="#000000" colspan="2"><img src="images/spacer.gif" width="1" height="1"</td></tr>
+	<tr><td bgcolor="#000000" colspan="2"style="width: 1px; height:1px"></td></tr>
 
 	<tr>
 		<td valign="top" align="left" colspan="2">
-			<font face="Arial" size="2"><b>Uptime</b> <?php
+			<font face="Arial" size="2"><b>Uptime</b> &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; <?php
 $uptime = shell_exec("cut -d. -f1 /proc/uptime");
 $days = floor($uptime/60/60/24);
 $hours = $uptime/60/60%24;
@@ -230,7 +222,7 @@ echo "$days days $hours hrs $mins mins";
 		</td>
 	</tr>
 
-	<tr><td bgcolor="#000000" colspan="2"><img src="images/spacer.gif" width="1" height="5"</td></tr>
+	<tr><td bgcolor="#000000" colspan="2"style="width: 1px; height:5px"></td></tr>
 
 	<tr>
 		<td valign="top" align="left" colspan="2">
